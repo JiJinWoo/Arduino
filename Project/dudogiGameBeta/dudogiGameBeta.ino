@@ -2,19 +2,19 @@
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7, 8);
 
-int Led[] = {A0, A1, A2};
-int Sw[] = {9, 10, 11};
+int led[] = {A0, A1, A2};
+int sw[] = {9, 10, 11};
 
 int rand_num; //무작위로 켜지는 Led와 Sw 번호
 int count = 0;  //두더지 잡은 수
-int totalGame = 10; //총 게임 횟수
+int total_game = 10; //총 게임 횟수
 
 int ending = 0;
 
 void setup(){
   for(int i = 0; i < 3; i++){
-    pinMode(Led[i], OUTPUT);
-    pinMode(Sw[i], INPUT_PULLUP);
+    pinMode(led[i], OUTPUT);
+    pinMode(sw[i], INPUT_PULLUP);
   }
   lcd.begin(16,2);
   lcd.clear();
@@ -22,13 +22,13 @@ void setup(){
 
 void loop(){
   if(ending == 0){
-    if(digitalRead(Sw[0]) == LOW){
+    if(digitalRead(sw[0]) == LOW){
       ending = 1;
       gameStart();
       startLcd();
     }
   }
-  else if(totalGame == 0){
+  else if(total_game == 0){
     endLcd();
     ending = 0;
   }
@@ -37,17 +37,17 @@ void loop(){
     switch(rand_num){
       case 0:
       dudogi();
-      totalGame--;
+      total_game--;
       break;
 
       case 1:
       dudogi();
-      totalGame--;
+      total_game--;
       break;
 
       case 2:
       dudogi();
-      totalGame--;
+      total_game--;
       break;
     }
   }
@@ -57,20 +57,20 @@ void loop(){
 
 void dudogi(){
   for(int i = 0; i < 20; i++){
-    if(totalGame == 0){
+    if(total_game == 0){
       break;
     }
-    else if(digitalRead(Sw[rand_num]) == LOW){
-      analogWrite(Led[rand_num], 0);
+    else if(digitalRead(sw[rand_num]) == LOW){
+      analogWrite(led[rand_num], 0);
       count++;
       lcd.setCursor(10, 1);
       lcd.print(count);
       break;
     }
     else{
-      analogWrite(Led[rand_num], 255);
+      analogWrite(led[rand_num], 255);
       delay(100);
-      analogWrite(Led[rand_num], 0);
+      analogWrite(led[rand_num], 0);
     }
   }
 }
@@ -91,7 +91,7 @@ void gameStart(){
 void startLcd(){
   lcd.setCursor(0,0);
   lcd.print("Total : ");
-  lcd.print(totalGame);
+  lcd.print(total_game);
   lcd.setCursor(0,1);
   lcd.print("Success : ");
 }
