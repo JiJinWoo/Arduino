@@ -1,17 +1,17 @@
 int trig = 8;
 int echo = 9;
 
-int BlueLed = 5;
-int YellowLed = 6;
-int RedLed = 7;
+int blueLed = 5;
+int yellowLed = 6;
+int redLed = 7;
  
 void setup() {
   Serial.begin(9600);
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
-  pinMode(BlueLed, OUTPUT);
-  pinMode(YellowLed, OUTPUT);
-  pinMode(RedLed, OUTPUT);
+  pinMode(blueLed, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
+  pinMode(redLed, OUTPUT);
 }
 
 void loop() {
@@ -31,20 +31,20 @@ void loop() {
   Serial.println("cm");
 
   if (10 < distance&&distance < 15) {
-    digitalWrite(BlueLed, HIGH);
+    digitalWrite(blueLed, HIGH);
   }
   else if(5 < distance&&distance < 9){
-    digitalWrite(BlueLed, LOW);
-    digitalWrite(YellowLed, HIGH);
+    digitalWrite(blueLed, LOW);
+    digitalWrite(yellowLed, HIGH);
   }
   else if(distance < 4) {
-    digitalWrite(YellowLed, LOW);
-    digitalWrite(RedLed, HIGH);
+    digitalWrite(yellowLed, LOW);
+    digitalWrite(redLed, HIGH);
   }
   else{
-    digitalWrite(BlueLed, LOW);
-    digitalWrite(YellowLed, LOW);
-    digitalWrite(RedLed, LOW);
+    digitalWrite(blueLed, LOW);
+    digitalWrite(yellowLed, LOW);
+    digitalWrite(redLed, LOW);
   }
   delay(200);
 }
