@@ -1,17 +1,15 @@
-https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=sisosw&logNo=221466848808
-
 #include<Servo.h>   //서브모터 헤더파일
 
 Servo motor;
 
-int motorDegree = 150;  //서브모터의 위치 저장 변수
+int motorDegree = 0;  //서브모터의 위치 저장 변수
 
+int echo = 7;
 int trig = 8;
-int echo = 9;
+
 
 void setup(){
     motor.attach(9);
-    motor.write(150);
     pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
 }
@@ -23,15 +21,20 @@ void loop(){
 
   float duration = pulseIn(echo, HIGH); //echo 핀이 HIGH를 유지한 시간. 즉, 초음파를 보냈다가 다시 돌아온 시간
 
-  float distance = duration / 58.8
+  float distance = duration / 58.8;
 
-  if(5 < distance && distance < 20){
-    for(int i = 0; i < 20; i++){    //20도 까지만 서보모터를 움직여라
-      motorDegree++;
+  if(distance < 10){
+    for(int i = 0; i < 30; i++){
+      motorDegree += 2;
+      motor.write(motorDegree);
+      delay(10);
     }
-    delay(1000);
-    for(int i = 0; i < 20; i++){
-      motorDegree--;
+    delay(2000);
+    for(int i = 0; i < 30; i++){
+      motorDegree -= 2;
+      motor.write(motorDegree);
+      delay(10);
     }
   }
+  delay(50);
 }
